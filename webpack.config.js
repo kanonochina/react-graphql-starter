@@ -4,7 +4,7 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 module.exports = {
     // devtool: 'inline-source-map',
-    context: path.join(__dirname, '/client'),
+    context: path.join(__dirname, '/src'),
     entry: './index.js',
     output: {
         path: path.join(__dirname, '/server/public/'),
@@ -34,7 +34,7 @@ module.exports = {
                 use: [
                     // Creates `style` nodes from JS strings
                     // 'style-loader',
-                    process.env.npm_lifecycle_script !== "nodemon server/index.js" ? 'style-loader' : MiniCssExtractPlugin.loader,
+                    process.env.npm_lifecycle_script === "nodemon server/index.js" ? 'style-loader' : MiniCssExtractPlugin.loader,
                     // Translates CSS into CommonJS
                     'css-loader',
                     // Compiles Sass to CSS
@@ -73,7 +73,7 @@ module.exports = {
             }
         ),
         new MiniCssExtractPlugin({
-            filename: '[name].css',
+            filename: 'styles.css',
             chunkFilename: '[id].css',
           }),
     ],

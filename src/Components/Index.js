@@ -4,7 +4,7 @@ import React, { Component, useState } from 'react';
 
 // Styling
 // import './index.css';
-import logo from '../graphics/rglogo.png'
+import logo from '../graphics/rglogo.svg'
 import '../style/index.scss';
 // Components
 
@@ -16,7 +16,7 @@ export default function Index() {
         <div>
              <div className="pageWrapper">
                 <div className="introContainer">
-                    
+                    <img className="hexContainer" src={logo} width={300} style={{margin:"30px"}} />
                     
                     <div className="loader">
                         <div className="hexContainer">
