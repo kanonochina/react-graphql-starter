@@ -16,9 +16,9 @@ export default function Index() {
         <div>
              <div className="pageWrapper">
                 <div className="introContainer">
-                    <img className="hexContainer" src={logo} width={300} style={{margin:"30px"}} />
+                    <img className="hexContainer" src={logo} width={100} style={{margin:"30px"}} />
                     
-                    <div className="loader">
+                    {/* <div className="loader">
                         <div className="hexContainer">
                             <div className="hex">
                                 <div className="hex inner"></div>
@@ -37,7 +37,7 @@ export default function Index() {
                             <div className="balls ball5"></div>
                             <div className="balls ball6"></div>
                         </div>
-                    </div>
+                    </div> */}
                     <h1>React Graphql Starter Template</h1>
                     
                 </div>
