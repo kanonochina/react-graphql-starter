@@ -1,6 +1,7 @@
 const path = require('path');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 module.exports = {
     // devtool: 'inline-source-map',
     context: path.join(__dirname, '/client'),
@@ -32,7 +33,8 @@ module.exports = {
                 exclude: /node_modules/,
                 use: [
                     // Creates `style` nodes from JS strings
-                    'style-loader',
+                    // 'style-loader',
+                    process.env.npm_lifecycle_script !== "nodemon server/index.js" ? 'style-loader' : MiniCssExtractPlugin.loader,
                     // Translates CSS into CommonJS
                     'css-loader',
                     // Compiles Sass to CSS
@@ -69,8 +71,13 @@ module.exports = {
                     [{ from: 'graphics', to: 'assets/' },
                     ]
             }
-        )
+        ),
+        new MiniCssExtractPlugin({
+            filename: '[name].css',
+            chunkFilename: '[id].css',
+          }),
     ],
+    
     optimization: {
         minimizer: [new UglifyJsPlugin()]
     }
