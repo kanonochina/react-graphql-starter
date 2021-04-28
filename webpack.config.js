@@ -1,3 +1,5 @@
+require("babel-core/register");
+require("babel-polyfill");
 const path = require('path');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
@@ -5,7 +7,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 module.exports = {
     // devtool: 'inline-source-map',
     context: path.join(__dirname, '/src'),
-    entry: './index.js',
+    entry: ['babel-polyfill', './index.js'],
     output: {
         path: path.join(__dirname, '/server/public/'),
         filename: 'bundle.js',
@@ -51,18 +53,21 @@ module.exports = {
                 ] 
             }
             
-        ]
+        ],
+        
     },
     devServer: {
         publicPath: '/',
         liveReload: true,
         disableHostCheck: true,   
+        // proxy: {'**': 'http://localhost:4000'},
         contentBase: path.join(__dirname, '/server/public'),
         watchContentBase: true,
         compress: true,
         port: 9000,
         overlay: true,
         historyApiFallback: true,
+            
     },
     plugins: [
         new CopyWebpackPlugin(
@@ -78,7 +83,15 @@ module.exports = {
           }),
     ],
     
-    optimization: {
-        minimizer: [new UglifyJsPlugin()]
-    }
+    // optimization: {
+    //     minimizer: [new UglifyJsPlugin({
+    //         sourceMap: true, 
+    //         uglifyOptions: {
+    //           ecma:8,  
+    //           compress: {
+    //             warnings: false
+    //           }
+    //         }
+    //       })]
+    // }
 };
